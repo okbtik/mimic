@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>橋本環奈 on X: "岡部大葵くんはわたしのお友達だよ🥹❤︎" / X</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="header" id="header">
+        <img src="header.png" alt="header-img">
+    </header>
+
+    <main class="main-container">
+         <img src="main.png" class="main-img">
+    </main>
+
+    <footer class="footer">
+        <img src="footer.png" alt="Footer Image">
+    </footer>
+<script>
+let lastScrollY = window.scrollY;
+const header = document.getElementById('header');
+
+window.addEventListener('scroll', () => {
+    if (window.scrollY > lastScrollY && window.scrollY > 100) {
+        // 下にスクロールした場合（かつ少しスクロールした時）
+        header.classList.add('is-hidden');
+    } else {
+        // 上にスクロールした場合
+        header.classList.remove('is-hidden');
+    }
+    lastScrollY = window.scrollY;
+});
+</script>
+</body>
+</html>

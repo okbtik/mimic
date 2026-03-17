@@ -5,62 +5,80 @@
     box-sizing: border-box;
 }
 
-/* ヘッダー：上にスクロールした時（一番上にある時）に表示 */
-/* position: sticky を使うことで、上部に留まる動きを制御できます */
+/* 全体共通の画像ルール：親要素からはみ出さないようにする */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* ヘッダーの修正 */
 .header {
-    position: sticky;
+    position: fixed;
     top: 0;
-    width: 100%;
+    left: 0;
+    width: 100vw; /* 画面幅いっぱいに固定 */
     height: 60px;
+    z-index: 9999; /* 他の要素より手前に */
     background: rgba(255, 255, 255, 0.8);
-    display: flex;
-    align-items: center;
-    justify-content: left;
-    z-index: 100;    
-    /* アニメーション設定 */
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     transition: transform 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .header.is-hidden {
     transform: translateY(-100%); /* 上に隠す */
 }
 
+/* ヘッダー画像が大きすぎないように制限 */
 .header-img {
-    height: auto;
-    width: 100%;
+    height: 40px; 
+    width: auto;
+    max-width: 90%; /* スマホで横幅を突き抜けないように */
     object-fit: contain;
-    opacity: 0.5;
 }
 
-/* メイン画像：画面いっぱいに表示 */
+/* メイン画像：幅に合わせてスクロール */
 .main-container {
     width: 100%;
-    line-height: 0;
+    padding-top: 0; /* ヘッダーを重ねるなら0 */
 }
 
 .main-img {
     width: 100%;
     height: auto;
-    display: block;
 }
 
-/* フッター：常に画面下部に固定 */
+/* フッターの修正：スマホで下に張り付かない問題を解決 */
 .footer {
     position: fixed;
     bottom: 0;
     left: 0;
-    width: 100%;
-    height: 80px; /* 画像の高さに合わせて調整 */
-    z-index: 100;
+    width: 100vw;
+    height: 70px;
+    background: rgba(255, 255, 255, 0.95);
+    z-index: 9999;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #fff; /* 背景色が必要な場合 */
-    border-top: 1px solid #ccc;
+    border-top: 1px solid #e0e0e0;
+    
+    /* iPhoneの画面下部のバー（ホームインジケーター）対策 */
+    padding-bottom: env(safe-area-inset-bottom);
+    height: calc(70px + env(safe-area-inset-bottom));
 }
 
 .footer img {
-    height: auto;
-    width: 100%;
+    height: 40px;
+    width: auto;
+    max-width: 90%;
     object-fit: contain;
+}
+
+/* コンテンツがフッターに被って最後まで見れないのを防ぐ */
+body {
+    padding-bottom: calc(80px + env(safe-area-inset-bottom));
 }
